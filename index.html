@@ -8,6 +8,7 @@
            margin:0;
 		}
 		.greyRectangle{
+			margin:0 auto;
 			position: fixed;
 			left: 100px;
 			top: 60px;
@@ -109,7 +110,7 @@
 <body>
 	<div class="greyRectangle">
 		<div class="trumpet">
-			<img src="images\a15.png">
+			<img src="images/a15.png">
 		</div>
 		 <div class="pane"> 
 			<div class="text">[温馨提示]最近有不少不法分子在网上骗人，请大家注意！！！</div>
@@ -119,13 +120,13 @@
 	<div class="rightRectangle"></div>
     <div class="box" id="box">
   	 <div class="slider" id="slider">
-  		<div class="slide"><img src="images\b5.png"></div>
-  		<div class="slide"><img src="images\b1.png"></div>
-  		<div class="slide"><img src="images\b2.png"></div>
-  		<div class="slide"><img src="images\b3.png"></div>
-  		<div class="slide"><img src="images\b4.png"></div>
-  		<div class="slide"><img src="images\b5.png"></div>
-  		<div class="slide"><img src="images\b1.png"></div>
+  		<div class="slide"><img src="images/b5.png"></div>
+  		<div class="slide"><img src="images/b1.png"></div>
+  		<div class="slide"><img src="images/b2.png"></div>
+  		<div class="slide"><img src="images/b3.png"></div>
+  		<div class="slide"><img src="images/b4.png"></div>
+  		<div class="slide"><img src="images/b5.png"></div>
+  		<div class="slide"><img src="images/b1.png"></div>
   	</div>
   	<span id="left"><</span>
   	<span id="right">></span>
@@ -168,6 +169,7 @@
           return;
         }
         isMoving=true;
+        change();
 		i--;
 		animate(slider,{left:-1200*i},function(){
 			if(i===0){
