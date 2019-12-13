@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		*{
+           padding:0;
+           margin:0;
+		}
+		.greyRectangle{
+			position: fixed;
+			left: 100px;
+			top: 60px;
+			width:1330px;
+            height:30px;
+            background-color: #ccc;
+		}
+		.trumpet{
+			position: fixed;
+			top: 67px;
+			left: 262px;
+		}
+		.text{
+			position: absolute;
+			left:500px;
+            color: red;
+		}
+		.pane{
+			position: fixed;
+			left: 280px;
+			top: 65px;
+			width: 900px;
+			height: 20.8px;
+			overflow: hidden;
+		}
+		.leftRectangle{
+           position:fixed;
+           left: 100px;
+           top: 60px;
+           width:5px;
+           height:500px;
+           background-color: rgb(0,0,0);
+		}
+		.rightRectangle{
+			position:fixed;
+			right: 100px;
+			top: 60px;
+            width:5px;
+            height:500px;
+            background-color: rgb(0,0,0);
+		}
+		.box{
+		     width: 1200px;
+		     height: 397px;
+		     position: relative;
+		     overflow: hidden;
+		     margin: 100px auto;
+		}
+		.slider{
+			width: 8400px;
+			position: absolute;
+			left: -1200px;
+		}
+		.slide{
+			width: 1200px;
+			overflow: hidden;
+			float: left;
+		}
+		.box>span{
+			display: block;
+			width: 30px;
+			height: 50px;
+			text-align: center;
+			cursor: pointer;
+			position: absolute;
+			background: rgb(255,0,0);
+			top: 175px;
+			line-height: 50px;
+			font-size: 30px;
+			
+		}
+		#left{
+				left: 30px;
+			}
+		#right{
+				right: 30px;
+			}
+		.circle{
+			position: absolute;
+			left: 500px;
+			bottom: 20px;
+			text-align: center;
+		}
+		.circle>li{
+            display: inline-block;
+			/*float: left;*/
+			width: 20px;
+			height: 20px;
+			background: #ccc;
+			cursor: pointer;
+			margin: 0 10px;
+			border-radius:50%; 
+		}
+		.circle .active{
+			background:red;
+		}
+	</style>
+</head>
+<body>
+	<div class="greyRectangle">
+		<div class="trumpet">
+			<img src="D:\大学\大二作业\web任务7\sucai6-master\images\a15.png">
+		</div>
+		 <div class="pane"> 
+			<div class="text">[温馨提示]最近有不少不法分子在网上骗人，请大家注意！！！</div>
+		 </div>
+	</div>
+	<div class="leftRectangle"></div>
+	<div class="rightRectangle"></div>
+    <div class="box" id="box">
+  	 <div class="slider" id="slider">
+  		<div class="slide"><img src="D:\大学\大二作业\web任务7\sucai6-master\images\b5.png"></div>
+  		<div class="slide"><img src="D:\大学\大二作业\web任务7\sucai6-master\images\b1.png"></div>
+  		<div class="slide"><img src="D:\大学\大二作业\web任务7\sucai6-master\images\b2.png"></div>
+  		<div class="slide"><img src="D:\大学\大二作业\web任务7\sucai6-master\images\b3.png"></div>
+  		<div class="slide"><img src="D:\大学\大二作业\web任务7\sucai6-master\images\b4.png"></div>
+  		<div class="slide"><img src="D:\大学\大二作业\web任务7\sucai6-master\images\b5.png"></div>
+  		<div class="slide"><img src="D:\大学\大二作业\web任务7\sucai6-master\images\b1.png"></div>
+  	</div>
+  	<span id="left"><</span>
+  	<span id="right">></span>
+  	<ul class="circle" id="circle">
+  			<li class="active">1</li>
+  			<li>2</li>
+  			<li>3</li>
+  			<li>4</li>
+  			<li>5</li>
+  	</ul>
+   </div>
+</body>
+<script src="animate.js"></script>
+<script type="text/javascript">
+	var box=document.getElementById("box");
+	var slider=document.getElementById("slider");
+	var circle=document.getElementById("circle").children;
+	var left=document.getElementById("left");
+	var right=document.getElementById("right");
+	var i=1;
+	var isMoving =false;
+	function carrynext(){
+        if(isMoving){
+          return;
+        }
+        isMoving=true;
+        change();
+		i++;
+		
+		animate(slider,{left:-1200*i},function(){
+			if(i===6){
+          slider.style.left="-1200px";
+          i=1;
+          }
+          isMoving=false;
+		});
+		}
+		function carryprev(){
+		if(isMoving){
+          return;
+        }
+        isMoving=true;
+		i--;
+		animate(slider,{left:-1200*i},function(){
+			if(i===0){
+          slider.style.left="-6000px";
+          i=5;
+          }
+          isMoving=false;
+		});
+		}
+	 var time=setInterval(carrynext,2000);
+	 box.onmouseover=function(){
+	 	animate(left,{opacity:50});
+	 	animate(right,{opacity:50});
+	 	clearInterval(time);
+	 }
+	 box.onmouseout=function(){
+        animate(left,{opacity:0});
+        animate(right,{opacity:0});
+        time=setInterval(carrynext,2000);
+	 }
+    right.onclick=carrynext;
+    left.onclick=carryprev;
+	for(var j=0;j<circle.length;j++){
+		circle[j].ix=j;
+        circle[j].onclick=function(){
+           i=this.ix+1;
+           change();
+        	animate(slider,{left:-1200*i});
+        }
+	}
+	function  change(){
+		for(var j=0;j<circle.length;j++){
+            circle[j].className='';
+		}
+		if(i==6){
+             circle[0].className='active';
+		}else{
+             circle[i-1].className='active';
+		}
+    
+	}
+	var bb=800;
+	var text=document.getElementsByClassName("text")[0];
+    setInterval(function(){
+    	
+        bb--;
+        text.style.left=bb+'px';
+        if(bb<-700)
+        	bb+=1500;
+
+    },15);
+</script>
+</html>
